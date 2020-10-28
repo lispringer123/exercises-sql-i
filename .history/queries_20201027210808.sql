@@ -89,7 +89,7 @@ SELECT * FROM invoices WHERE billing_city = 'Mountain View' AND billing_state = 
 
 -- A list of the 10 most valuable invoices made before January 1st, 2010
 -- Hint: Dates are formatted like 'YYYY-MM-DD' and you can compare them using '<', '>', '<=' and '>='
-SELECT * FROM invoices WHERE invoice_date > 2010-01-01 ORDER BY total DESC LIMIT 10;
+SELECT * FROM invoices WHERE
 
 
 -- The number of invoices from Chicago, IL
@@ -111,14 +111,9 @@ SELECT billing_state, COUNT(*), SUM(total) FROM invoices WHERE billing_country =
 SELECT billing_state, COUNT(*), SUM(total), AVG(total) FROM invoices WHERE billing_country = 'USA' AND billing_state = 'CA' GROUP BY billing_state;
 
 -- The count, total, and average of invoice totals, grouped by state, ordered by average invoice total from highest-to-lowest
-SELECT billing_state, COUNT(*), SUM(total), AVG(total) FROM invoices WHERE billing_country = 'USA' GROUP BY billing_state ORDER BY AVG(total) DESC;
-
 
 -- A list of the top 5 countries by number of invoices
-SELECT billing_country, COUNT(*) FROM invoices GROUP BY billing_country ORDER BY COUNT(*) DESC;
 
 -- A list of the top 5 countries by gross/total invoice size
-SELECT billing_country, SUM(total) FROM invoices GROUP BY billing_country ORDER BY SUM(total) DESC;
 
 -- A list of the top 5 countries by average invoice size
-SELECT billing_country, AVERAGE(total) FROM invoices GROUP BY billing_country ORDER BY AVERAGE(total) DESC;
