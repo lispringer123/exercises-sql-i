@@ -108,32 +108,9 @@ LIMIT 5;
 
 -- The top 5 albums by total album price
 -- Hint: the "tracks" table has a unit_price field, so the "price" of an album
--- is the sum of its tracks' unit_price fields.
-
-SELECT albums.id, albums.title, SUM(unit_price) AS album_price
-FROM albums
-JOIN tracks
-  ON (tracks.album_id = albums.id)
-GROUP BY albums.id
-ORDER BY album_price
-DESC
-LIMIT 5;
-
-
+--       is the sum of its tracks' unit_price fields.
 
 -- The 10 albums with the longest play-time
-SELECT albums.id, albums.title, SUM(milliseconds) AS album_length
-FROM albums
-JOIN tracks
-  ON (tracks.album_id = albums.id)
-GROUP BY albums.id
-ORDER BY album_length
-DESC
-LIMIT 10;
-
-
 
 -- The 10 highest-selling tracks of all time
 -- Hint: you'll need to join the tracks table and the invoice_lines table
-
-SELECT invoice_lines.id, invoice_lines.track_id, COUNT(*) AS number_of_sales, number_of_sales * unit_price AS total_track_sales FROM invoice_lines JOIN tracks ON (tracks.id = invoice_lines.track_id) GROUP BY invoice_lines.track_id ORDER BY total_track_sales DESC LIMIT 10;

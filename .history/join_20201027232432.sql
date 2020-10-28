@@ -136,4 +136,11 @@ LIMIT 10;
 -- The 10 highest-selling tracks of all time
 -- Hint: you'll need to join the tracks table and the invoice_lines table
 
-SELECT invoice_lines.id, invoice_lines.track_id, COUNT(*) AS number_of_sales, number_of_sales * unit_price AS total_track_sales FROM invoice_lines JOIN tracks ON (tracks.id = invoice_lines.track_id) GROUP BY invoice_lines.track_id ORDER BY total_track_sales DESC LIMIT 10;
+SELECT tracks.id, tracks.name, SUM(unit_price) AS total_track_sales,
+FROM tracks
+JOIN invoice_lines
+  ON (invoice_lines.track_id = tracks.id)
+GROUP BY tracks.id
+ORDER BY total_track_sales
+DESC
+LIMIT 10;
